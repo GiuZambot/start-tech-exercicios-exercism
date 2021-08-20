@@ -48,4 +48,10 @@ export class Triangle {
         // Tem todos os lados diferentes
         return true;
     }
+
+
+    get isDegenerate() {
+        // extra para desafios de triangulos degenerados
+        return !this.trianguloPodeExistir;
+    }
 }

@@ -101,4 +101,61 @@ describe('Triangle', () => {
             expect(triangle.isScalene).toBe(true);
         });
     });
+
+    describe('degenerate triangle', () => {
+        test('no sides are equal', () => {
+            const triangle = new Triangle(0, 0, 0);
+            expect(triangle.isDegenerate).toBe(true);
+        });
+
+        test('all sides are equal', () => {
+            const triangle = new Triangle(2, 2, 4);
+            expect(triangle.isDegenerate).toBe(true);
+        });
+
+        test('two sides are equal', () => {
+            const triangle = new Triangle(4, 2, 2);
+            expect(triangle.isDegenerate).toBe(true);
+        });
+
+        test('may not violate triangle inequality', () => {
+            const triangle = new Triangle(2, 4, 2);
+            expect(triangle.isDegenerate).toBe(true);
+        });
+
+        test('sides may be floats', () => {
+            const triangle = new Triangle(0.2, 0.2, 0.4);
+            expect(triangle.isDegenerate).toBe(true);
+        });
+
+        test('all sides are equal', () => {
+            const triangle = new Triangle(2, 2, 2);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+
+        test('any side is unequal', () => {
+            const triangle = new Triangle(2, 3, 2);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+
+        test('no sides are equal', () => {
+            const triangle = new Triangle(5, 4, 6);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+
+        test('last two sides are equal', () => {
+            const triangle = new Triangle(3, 4, 4);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+
+        test('first two sides are equal', () => {
+            const triangle = new Triangle(4, 4, 3);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+
+        test('first and last sides are equal', () => {
+            const triangle = new Triangle(4, 3, 4);
+            expect(triangle.isDegenerate).toBe(false);
+        });
+    });
 });
