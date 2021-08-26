@@ -4,7 +4,17 @@
 //
 
 export const countWords = (frase) => {
-    const palavras = frase.split(' ');
-    const palavrasSet = new Set(palavras);
-    return palavrasSet;
+    const palavrasArr = frase.
+    toLowerCase().
+    replace(/\b'\b/g, 'A').
+    replace('\n', '').
+    split(/\W+/g).
+    filter(x => x).
+    join(" ").
+    replace(/A/g, "'").
+    split(" ");
+
+    const wordCount = {};
+    palavrasArr.map(x => wordCount[x] = (x in wordCount) ? wordCount[x] + 1 : 1);
+    return wordCount;
 };
