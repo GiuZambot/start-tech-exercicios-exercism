@@ -33,8 +33,10 @@ export function needsLicense(kind) {
 export function chooseVehicle(option1, option2) {
   const rest = ' is clearly the better choice.'
   let result = '';
-  if (option1 === 'Bugatti Veyron' || option1 === 'Chery EQ') result = option1;
-  if (option1 === 'Ford Pinto' || option1 === '2020 Gazelle Medeo') result = option2;
+
+  if (option1 < option2) result = option1;
+  else result = option2;
+
   return result + rest;
 }
 
