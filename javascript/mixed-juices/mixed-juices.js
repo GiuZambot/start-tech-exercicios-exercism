@@ -62,7 +62,6 @@ export function limesToCut(wedgesNeeded, limes) {
     }
     counter++;
     wedges += limeWegdes;
-    if (counter > 20) break;
   }
   return counter;
 }
