@@ -66,6 +66,5 @@ export function preparationTimeInMinutes(numberOfLayers) {
  * @returns {number} the total working time
  */
 export function totalTimeInMinutes(numberOfLayers, actualMinutesInOven) {
-  console.log(preparationTimeInMinutes(numberOfLayers), remainingMinutesInOven(actualMinutesInOven));
   return preparationTimeInMinutes(numberOfLayers) + actualMinutesInOven;
 }
