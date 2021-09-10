@@ -46,8 +46,7 @@ export function ticketStatus(tickets, ticketId) {
  * @returns {string} ticket status
  */
 export function simpleTicketStatus(tickets, ticketId) {
-  if (!tickets.hasOwnProperty(ticketId) || tickets[ticketId] === null) return 'invalid ticket !!!';
-  return tickets[ticketId];
+  return tickets[ticketId] ?? 'invalid ticket !!!';
 }
 
 /**
@@ -57,6 +56,5 @@ export function simpleTicketStatus(tickets, ticketId) {
  * @returns {string | undefined} version
  */
 export function gtcVersion(visitor) {
-  if (!visitor.hasOwnProperty('gtc')) return undefined;
-  return visitor.gtc.version;
+  return visitor.gtc?.version;
 }
