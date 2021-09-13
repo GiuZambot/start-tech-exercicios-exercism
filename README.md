@@ -1,1 +1,0 @@
-# Exercícios do site Exercism
