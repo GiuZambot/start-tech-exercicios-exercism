@@ -1,0 +1,22 @@
+{
+  "blurb": "Determine if a number is an Armstrong number",
+  "authors": [
+    "Stargator"
+  ],
+  "contributors": [
+    "amscotti"
+  ],
+  "files": {
+    "solution": [
+      "lib/armstrong_numbers.dart"
+    ],
+    "test": [
+      "test/armstrong_numbers_test.dart"
+    ],
+    "example": [
+      ".meta/lib/example.dart"
+    ]
+  },
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Narcissistic_number"
+}
