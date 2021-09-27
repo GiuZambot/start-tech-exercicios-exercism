@@ -36,7 +36,7 @@ export function pickFruit(variety, quantity, callback) {
  * This is a callback function to be passed to the checkInventory API
  * handles the next step once the inventory is known
  * @param {string | null} err
- * @param {boolean} isAvailable
+ * @param {boolean | Object} isAvailable
  * @return {AvailabilityAction} whether the fruit was purchased 'PURCHASE' or 'NOOP'
  */
 export function purchaseInventoryIfAvailable(err, isAvailable) {
