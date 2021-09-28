@@ -172,3 +172,7 @@ The correct translation of `'arlogh Qoylu'pu'?` is **How many times has it been 
 ### Created by
 
 - @SleeplessByte
+
+### Contributed to by
+
+- @AndrewLawendy

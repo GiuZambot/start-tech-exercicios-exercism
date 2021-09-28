@@ -30,9 +30,15 @@ export class TranslationService {
    * @param {string} text
    * @returns {Promise<string>}
    */
-  free(text) {
-    return this.api.fetch(text).then();
+  async free(text) {
+    try {
+      const translation = await this.api.fetch(text);
+      return translation.translation;
+    } catch (error) {
+      throw error;
+    }
   }
+
 
   /**
    * Batch translates the given texts using the free service.
@@ -44,8 +50,15 @@ export class TranslationService {
    * @param {string[]} texts
    * @returns {Promise<string[]>}
    */
-  batch(texts) {
-    return Promise.all(texts.map((s) => this.free(s))).then();
+  async batch(texts) {
+    if (texts.length === 0) throw new BatchIsEmpty();
+    const traducoes = [];
+    try {
+      for (const buscado of texts) traducoes.push(await this.free(buscado));
+    } catch (error) {
+      throw error;
+    }
+    return traducoes;
   }
 
   /**
@@ -57,9 +70,15 @@ export class TranslationService {
    * @param {string} text
    * @returns {Promise<void>}
    */
-  request(text, retries = 3, err = null) {
-    if (!retries) return Promise.reject(err);
-    return this.free(text).catch(err => this.request(text, retries - 1, err));
+  request(busca) {
+    const novaPromise = (busca) => {
+      return new Promise((resolve, reject) => {
+        this.api.request(busca, (e) => e ? reject(e) : resolve(undefined))
+      })
+    }
+    return novaPromise(busca)
+      .catch(() => novaPromise(busca))
+      .catch(() => novaPromise(busca))
   }
 
   /**
@@ -73,7 +92,7 @@ export class TranslationService {
    * @returns {Promise<string>}
    */
   premium(text, minimumQuality) {
-    return this.api.fetch(text).then(x => x.quality > minimumQuality);
+
   }
 }
 
