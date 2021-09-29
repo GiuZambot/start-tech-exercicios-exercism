@@ -1,3 +1,5 @@
+import { NotAvailable } from "./errors";
+
 /// <reference path="./global.d.ts" />
 // @ts-check
 //
@@ -67,13 +69,13 @@ export class TranslationService {
    * Note: the request service is flaky, and it may take up to three times for
    *       it to accept the request.
    *
-   * @param {string} text
+   * @param {string} busca
    * @returns {Promise<void>}
    */
   request(busca) {
     const novaPromise = (busca) => {
       return new Promise((resolve, reject) => {
-        this.api.request(busca, (e) => e ? reject(e) : resolve(undefined))
+        this.api.request(busca, (erro) => erro ? reject(erro) : resolve(undefined));
       })
     }
     return novaPromise(busca)
@@ -91,8 +93,19 @@ export class TranslationService {
    * @param {number} minimumQuality
    * @returns {Promise<string>}
    */
-  premium(text, minimumQuality) {
-
+  async premium(text, minimumQuality) {
+    return this.api.fetch(text)
+      .catch((error) => {
+        if (error instanceof NotAvailable) {
+          return this.request(text).then(() => this.api.fetch(text));
+        } else {
+          throw error;
+        }
+      })
+      .then(tradObj => {
+        if (tradObj.quality > minimumQuality) return tradObj.translation;
+        throw new QualityThresholdNotMet(text);
+      })
   }
 }
 
